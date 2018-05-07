@@ -10,7 +10,7 @@ app.use("/Resources", express.static(__dirname + '/Resources')); // allows expre
 
 app.get("/", function(req, res)
 {
-res.sendFile("index.html", {"root": __dirname + '/Web-Info'}); // renders index.html page as a default route page -- main folder / web-info / index.html
+res.sendFile("index.html", {"root": __dirname + '/src'}); // renders index.html page as a default route page -- main folder / web-info / index.html
 });
 
 const port = process.env.PORT || 3000; // creates dynamic port
