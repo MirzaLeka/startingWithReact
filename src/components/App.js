@@ -10,4 +10,17 @@ class App extends Component {
   }
 }
 
-export default App;
+class Sub extends Component {
+  render() {
+    return (
+        <p>Subtitle</p>
+    );
+  }
+}
+
+//export default App;
+
+module.exports = {
+  App,
+  Sub
+};
