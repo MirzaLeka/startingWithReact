@@ -1,6 +1,9 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {App, Sub} from './components/App';
+import searchBar from "./components/search_bar";
+
+ReactDOM.render(<searchBar/>, document.getElementById("searchbar"));
 
 ReactDOM.render(<div>
 <App />
@@ -8,4 +11,4 @@ ReactDOM.render(<div>
 <App />
 </div>  , document.getElementById('app'));
 
-ReactDOM.render(<Sub />, document.getElementById('sub'));
+ReactDOM.render(<Sub />, document.querySelector('.sub'));
