@@ -9,7 +9,7 @@ import SearchBar from './components/search_bar';
 const Inp = () => {
     return (
     <div>
-    <SearchBar />
+    <SearchBar /> {/* instance of a class SearchBar */}
     </div>
        );
     }
