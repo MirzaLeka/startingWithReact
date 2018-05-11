@@ -1,9 +1,20 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import {App, Sub} from './components/App';
-import searchBar from "./components/search_bar";
+//import searchBar from "./components/search_bar";
+//ReactDOM.render(<searchBar/>, document.getElementById("searchbar"));
+import SearchBar from './components/search_bar';
 
-ReactDOM.render(<searchBar/>, document.getElementById("searchbar"));
+// Renders one component (searchbar) inside another
+const Inp = () => {
+    return (
+    <div>
+    <SearchBar />
+    </div>
+       );
+    }
+
+ReactDOM.render(<Inp/>, document.getElementById("searchbar"));
 
 ReactDOM.render(<div>
 <App />
