@@ -25,9 +25,6 @@ const API_KEY = "AIzaSyAyKU6wP8ZmOhzugkW3ocRssocX8YQ9Qco";
                 );
             }
             
-         
-
-
         render() {
             return (
                 <div>
@@ -41,13 +38,13 @@ const API_KEY = "AIzaSyAyKU6wP8ZmOhzugkW3ocRssocX8YQ9Qco";
 
 ReactDOM.render(<AppIndex/>, document.getElementById("searchbar"));
 
-ReactDOM.render(<div>
+/*ReactDOM.render(<div>
 <App />
 <App />
 <App />
-</div>  , document.getElementById('app'));
+</div>  , document.getElementById('app')); */
 
-ReactDOM.render(<Sub />, document.querySelector('.sub'));
+//ReactDOM.render(<Sub />, document.querySelector('.sub'));
 
 // Renders one component (searchbar) inside another
 // Functional components can render class components
