@@ -17,7 +17,9 @@ return  (
 
 <div className="embed-responsive embed-responsive-16by9">
 
-<iframe src={url} className="embed-responsive-item"></iframe>
+<iframe src={url} className="embed-responsive-item" 
+allowfullscreen="allowfullscreen" mozallowfullscreen="mozallowfullscreen"
+msallowfullscreen="msallowfullscreen" oallowfullscreen="oallowfullscreen" webkitallowfullscreen="webkitallowfullscreen"></iframe>
 
 </div>
 

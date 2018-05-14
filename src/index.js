@@ -1,3 +1,4 @@
+const _ = require('lodash');
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import {App, Sub} from './components/App';
@@ -8,8 +9,6 @@ import VideoDetail from './components/video_detail';
 
 const API_KEY = "AIzaSyAyKU6wP8ZmOhzugkW3ocRssocX8YQ9Qco";
 
-// In React our main component (in this case index.js) should be the only one responsible for AJAX and thus all other scripts will derive from it
-
     class AppIndex extends Component  {
         constructor (props) {
             super(props);
@@ -19,22 +18,31 @@ const API_KEY = "AIzaSyAyKU6wP8ZmOhzugkW3ocRssocX8YQ9Qco";
             selectedVideo: null
          };
 
-            // When component (page) loads, constructor will run right away and that will kick of the search
-            // and then callback (videos) function will be called and it will update our state with the list of videos
-            YTSearch({
-                key: API_KEY,
-                term: 'battlefield'}, (videos) => { // What we type in term will be result of our youtube search
-                this.setState({
-                videos : videos,
-                selectedVideo: videos[0] }); 
-                }
-                );
+         this.videoSearch('fireplace'); //setting default value for term == default search when page loads
             }
+
+            videoSearch(term) {
+               
+                YTSearch({
+                    key: API_KEY,
+                    term: term}, (videos) => { // What we type in term will be result of our youtube search
+                    this.setState({
+                    videos : videos,
+                    selectedVideo: videos[0] }); 
+                    }
+                    );
+    
+    }
+    
             
         render() {
+
+            // Prevents search to be executed onchange, but rather after 500 seconds, so screen won't refresh 10 times a second
+            const videoSearch = _.debounce((term) => {this.videoSearch(term)}, 500);
+
             return (
                 <div>
-                <SearchBar /> 
+                <SearchBar onSearchTermChange= {term => this.videoSearch(term)} /> 
                 <VideoDetail video={this.state.selectedVideo}/>
                 <VideoList videos={this.state.videos} onVideoSelect = {selectedVideo => this.setState({selectedVideo})}/>
                 </div>
