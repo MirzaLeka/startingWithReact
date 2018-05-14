@@ -22,11 +22,13 @@ constructor (props) {
   render() { // we don't need to type render() function because we use ES6
 
   return (
-    <input
+  <div className="search-bar">
+  <input
      value={this.state.term} // With this our component becomes a controlled component with it's value change every time the state changes
      onChange={(event) => this.setState({ //this.setState causes the component to re-render & then value of the input is set to a value we entered
       term: event.target.value // setting the state by putting it into object and changing value of a property term 
     }) } />
+    </div>
   )
 
   // this.state.term = value of the input. No need to use Jquery

@@ -23,7 +23,7 @@ const API_KEY = "AIzaSyAyKU6wP8ZmOhzugkW3ocRssocX8YQ9Qco";
             // and then callback (videos) function will be called and it will update our state with the list of videos
             YTSearch({
                 key: API_KEY,
-                term: 'react js'}, (videos) => { // What we type in term will be result of our youtube search
+                term: 'battlefield'}, (videos) => { // What we type in term will be result of our youtube search
                 this.setState({
                 videos : videos,
                 selectedVideo: videos[0] }); 
@@ -36,7 +36,7 @@ const API_KEY = "AIzaSyAyKU6wP8ZmOhzugkW3ocRssocX8YQ9Qco";
                 <div>
                 <SearchBar /> 
                 <VideoDetail video={this.state.selectedVideo}/>
-                <VideoList videos={this.state.videos}/>
+                <VideoList videos={this.state.videos} onVideoSelect = {selectedVideo => this.setState({selectedVideo})}/>
                 </div>
                 )
         }

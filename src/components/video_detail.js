@@ -21,7 +21,7 @@ return  (
 
 </div>
 
-<div dlassName="details">
+<div className="details">
 
 <div>{video.snippet.title}</div>
 <div>{video.snippet.description}</div>
