@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Page Title</title>
+</head>
+<body>
+
+
+  <div id="demo">
+  
+</div>
+
+</body>
+
+<style>
+
+.commentContainer{
+  background: lightBlue;
+  width: 200px;
+  text-align: center;
+  padding: 20px 0;
+  margin-top: 20px;
+}
+
+.commentText{
+  color: #565;
+}
+
+button{
+  margin: 5px;
+}
+
+
+</style>
+
+<script type="text/babel">
+
+
+class Comment extends React.Component{
+
+render() {
+
+return (
+      <div className="commentContainer">
+<div className="commentText">{this.props.children}</div>
+<button style={{color: "#000"}} className="btn btn-primary">Edit</button>
+<button className="btn btn-danger">Delete</button>
+</div>
+);
+
+}
+
+
+}
+
+ReactDOM.render(
+<div>
+  <Comment>Hello</Comment>
+  <Comment>React</Comment>
+ </div> ,
+document.getElementById('demo')
+);
+
+</script>
+
+</html>
