@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Page Title</title>
+</head>
+<body>
+
+
+  <div id="check">
+  
+</div>
+
+</body>
+
+
+<script type="text/babel">
+
+
+class CheckBox extends React.Component{
+
+  constructor(props) {
+   super(props);
+   this.state = {isChecked: true};
+  }
+  
+  changeState() {
+
+       this.setState({
+     isChecked: !this.state.isChecked
+    });
+    
+ }
+
+render() {
+  var msg = '';
+  
+  if (this.state.isChecked) {
+    msg = "Checkbox is checked!";
+  }
+  else {
+    msg = "Checkbox is not checked!";
+  }
+
+return (
+  <div> 
+    <input onChange={this.changeState} type="checkbox" defaultChecked={this.state.isChecked}/>
+    <h3>{msg}</h3>
+    </div>
+);
+
+}
+
+
+}
+
+ReactDOM.render(
+
+  <CheckBox />
+ ,
+document.getElementById('check')
+);
+
+</script>
+
+</html>
