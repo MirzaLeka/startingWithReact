@@ -16,4 +16,4 @@ npm run build
 
 ## App Info
 
-Building simple Youtube App with React
+Using Youtube API, I made a simple React app that allows users to search for Youtube videos and get list of related videos as a response.
