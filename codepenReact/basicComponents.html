@@ -14,12 +14,20 @@
 
 <style>
 
+#main{
+  width: 100%;
+}
+
 .commentContainer{
-  background: lightBlue;
+  background: #DDD;
   width: 200px;
   text-align: center;
   padding: 20px 0;
+  text-align: center;
+  margin: 0 auto;
   margin-top: 20px;
+  display: block;
+  border: 1px solid #AAA;
 }
 
 .commentText{
@@ -30,6 +38,13 @@ button{
   margin: 5px;
 }
 
+body{
+  margin: 20px;
+}
+
+.board{
+  background: #AEEAFF;
+}
 
 </style>
 
@@ -41,12 +56,30 @@ class Board extends React.Component{
   constructor(props) {
     super(props);
     
+    // make sure you put the following in every function you intend to use this keyword, because *this* will not be recoginized as a keyword without it
     this.removeComment = this.removeComment.bind(this);
     this.updateComment = this.updateComment.bind(this);
+    this.eachComment = this.eachComment.bind(this);
+    this.add = this.add.bind(this);
     
+    // comments array empty by default
     this.state = ({
-      comments: ['Apple', 'Beans','Pie']
+      comments: [] 
     });
+  }
+  
+
+  add (text) {
+    
+    // arr = current comments. we push new item into array and assign arr to initual value of this.state.comments
+    
+    
+    let arr = this.state.comments;
+    arr.push(text);
+    this.setState({
+      comments: arr
+    });
+    
   }
   
   
@@ -73,11 +106,10 @@ class Board extends React.Component{
     });
     
   }
-  
-  
+   
   eachComment (text, i) {
     return (
-      <Comment key={i} index={i}>
+      <Comment key={i} index={i} updateCommentText={this.updateComment} deleteFromBoard={this.removeComment}>
         {text}
       </Comment>
     );
@@ -85,15 +117,19 @@ class Board extends React.Component{
   
   render () {
     return (
-    <div className='board'>
+<div>
+  <button onClick={this.add.bind(null, 'Default Text')} className="btn btn-info">Add New</button>
+      <div className='board'>
   {this.state.comments.map(this.eachComment)}     
  </div> 
+  </div>
     );
   }
   
-  
 }
 
+
+//////////////////////////////
 
 
 class Comment extends React.Component{
@@ -118,16 +154,14 @@ edit() {
   
 remove () {
     console.log("Removing");
+  this.props.deleteFromBoard(this.props.index);
 }
   
   save () {
+    console.log("Saved");    
+    let val = this.refs.newText.value;
     
-    let val = '';
-    val = this.refs.newText.value;
-    
-    console.log(`Value of val is: ${val}`)
-    
-    console.log("Saved");
+    this.props.updateCommentText(val, this.props.index);
     
     this.setState({
       editing : false
@@ -158,8 +192,6 @@ return (
   
 render() {
   
-  console.log(`Value of editing is: ${this.state.editing}`);
-  
   if (this.state.editing) {
   return this.renderNormal();  
   }
@@ -177,6 +209,31 @@ ReactDOM.render(
 ,
 document.getElementById('demo')
 );
+
+// So what happened here?
+
+/* We had three comments, they knew nothing about each other. So if we wanted to rearrange them, create new, delete, we needed to bring all of them into an array. 
+
+So instead of rendering each Comment individualy we put all of them into a Board component.
+
+Inside Board we placed an array and for every item in array, we'll print an instance of Comment class (3 times = 3 Comments) using map.
+Then we expanded this by adding eachComment function and using it as a callback for map() function.
+
+Since each element in array had a value (Strings), we assign these values to each Comment we create through our loop => this.props.children. 
+
+Now since all the Comments that come out of the loop will be different, we gave each unique key and set that key to be an index of an array.
+
+Keys are unique for react, but we don't want to mess with them, so we create a new prop called Index and assign it the same value we gave to a key, our counter (i).
+Then using splice we can remove Comment with that index from an array.
+
+Then we create update and remove functions.
+We pass both of these functions an index prop, value of counter. So if you click on third Comment you'll get an index of third Comment => 2.
+
+Once clicked on button remove, we tie once remove function from Comment component with a remove function from Board component. To connect functions from one component with the functions from another we use Props!
+
+*/
+
+
 </script>
 
 </html>
