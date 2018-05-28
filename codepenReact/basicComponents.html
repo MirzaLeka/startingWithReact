@@ -36,11 +36,73 @@ button{
 <script type="text/babel">
 
 
+class Board extends React.Component{
+  
+  constructor(props) {
+    super(props);
+    
+    this.removeComment = this.removeComment.bind(this);
+    this.updateComment = this.updateComment.bind(this);
+    
+    this.state = ({
+      comments: ['Apple', 'Beans','Pie']
+    });
+  }
+  
+  
+  removeComment (i) {
+    console.log(`Removing comment ${i}`);
+    let arr = this.state.comments;
+    // we need to remove item from an array
+    arr.splice(i, 1); // where do I start removing (i) and how many do you want to remove (1)
+    
+    this.setState({
+      comments: arr
+    });
+    
+  }
+  
+  
+  updateComment (newText, i) {
+    console.log('Updating comment');
+    let arr = this.state.comments;
+    arr[i] = newText;
+    
+    this.setState({
+      comments: arr
+    });
+    
+  }
+  
+  
+  eachComment (text, i) {
+    return (
+      <Comment key={i} index={i}>
+        {text}
+      </Comment>
+    );
+  }
+  
+  render () {
+    return (
+    <div className='board'>
+  {this.state.comments.map(this.eachComment)}     
+ </div> 
+    );
+  }
+  
+  
+}
+
+
+
 class Comment extends React.Component{
   constructor(props) {
     super(props);
  
   this.edit = this.edit.bind(this);
+  this.save = this.save.bind(this);
+  this.remove = this.remove.bind(this);
     
     this.state = ({
       editing : false
@@ -58,15 +120,52 @@ remove () {
     console.log("Removing");
 }
   
-render() {
-
+  save () {
+    
+    let val = '';
+    val = this.refs.newText.value;
+    
+    console.log(`Value of val is: ${val}`)
+    
+    console.log("Saved");
+    
+    this.setState({
+      editing : false
+    });
+    
+  }
+  
+  renderNormal() {
+    
 return (
- <div className="commentContainer">
+    <div className="commentContainer">
+      <textarea ref='newText' defaultValue={this.props.children}></textarea>
+<button onClick={this.save} className="btn btn-success">Save</button>
+</div>
+);
+    
+  }
+  
+  renderForm() {
+ return (
+  <div className="commentContainer">
 <div className="commentText">{this.props.children}</div>
 <button onClick={this.edit} style={{color: "#000"}} className="btn btn-primary">Edit</button>
 <button onClick={this.remove} className="btn btn-danger">Delete</button>
 </div>
-);
+ );   
+  }
+  
+render() {
+  
+  console.log(`Value of editing is: ${this.state.editing}`);
+  
+  if (this.state.editing) {
+  return this.renderNormal();  
+  }
+  else {
+    return this.renderForm();
+  }
 
 }
 
@@ -74,13 +173,10 @@ return (
 }
 
 ReactDOM.render(
-<div>
-  <Comment>Hello</Comment>
-  <Comment>React</Comment>
- </div> ,
+  <Board />
+,
 document.getElementById('demo')
 );
-
 </script>
 
 </html>
