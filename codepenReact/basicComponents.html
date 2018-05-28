@@ -51,6 +51,7 @@ body{
 <script type="text/babel">
 
 
+
 class Board extends React.Component{
   
   constructor(props) {
@@ -61,13 +62,22 @@ class Board extends React.Component{
     this.updateComment = this.updateComment.bind(this);
     this.eachComment = this.eachComment.bind(this);
     this.add = this.add.bind(this);
+    this.deleteAll = this.deleteAll.bind(this);
     
     // comments array empty by default
     this.state = ({
       comments: [] 
     });
+    
   }
   
+  deleteAll() {
+    
+    this.setState({
+      comments: []
+    });
+    
+  }
 
   add (text) {
     
@@ -106,7 +116,8 @@ class Board extends React.Component{
     });
     
   }
-   
+  
+  
   eachComment (text, i) {
     return (
       <Comment key={i} index={i} updateCommentText={this.updateComment} deleteFromBoard={this.removeComment}>
@@ -115,20 +126,51 @@ class Board extends React.Component{
     );
   }
   
-  render () {
-    return (
-<div>
+  // If there are no comments, renderInitial will display *add new* button
+  renderInitial() {
+      return (  
+    <div>
   <button onClick={this.add.bind(null, 'Default Text')} className="btn btn-info">Add New</button>
-      <div className='board'>
+      <div style={{padding: "0px"}} className='board'>
   {this.state.comments.map(this.eachComment)}     
  </div> 
   </div>
-    );
+  );  
+
+    
   }
+  
+  // Once you add a comment, renderLatter will display *delete all* button for you to delete all comments at once
+  renderLatter(){
+  return (
+    <div>
+  <button onClick={this.add.bind(null, 'Default Text')} className="btn btn-info">Add New</button>
+  <button onClick={this.deleteAll} className="btn btn-danger">Delete All</button>
+      <div style={{padding: "20px"}} className='board'>
+  {this.state.comments.map(this.eachComment)}     
+ </div> 
+  </div>
+  );  
+    
+  }
+  
+  
+  render () {
+    
+    if (this.state.comments.length == 0) {
+      return this.renderInitial();
+    }
+    else {
+      return this.renderLatter();
+    }
+    
+  }
+  
   
 }
 
 
+//////////////////////////////
 //////////////////////////////
 
 
@@ -184,8 +226,8 @@ return (
  return (
   <div className="commentContainer">
 <div className="commentText">{this.props.children}</div>
-<button onClick={this.edit} style={{color: "#000"}} className="btn btn-primary">Edit</button>
-<button onClick={this.remove} className="btn btn-danger">Delete</button>
+<button onClick={this.edit} className="btn btn-primary">Edit</button>
+<button onClick={this.remove} className="btn btn-warning">Delete</button>
 </div>
  );   
   }
@@ -210,6 +252,7 @@ ReactDOM.render(
 document.getElementById('demo')
 );
 
+
 // So what happened here?
 
 /* We had three comments, they knew nothing about each other. So if we wanted to rearrange them, create new, delete, we needed to bring all of them into an array. 
@@ -232,6 +275,8 @@ We pass both of these functions an index prop, value of counter. So if you click
 Once clicked on button remove, we tie once remove function from Comment component with a remove function from Board component. To connect functions from one component with the functions from another we use Props!
 
 */
+
+
 
 
 </script>
