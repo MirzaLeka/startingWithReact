@@ -37,14 +37,34 @@ button{
 
 
 class Comment extends React.Component{
-
+  constructor(props) {
+    super(props);
+ 
+  this.edit = this.edit.bind(this);
+    
+    this.state = ({
+      editing : false
+    });
+  }
+  
+edit() {
+  console.log("Editing");
+  this.setState({
+    editing : true
+  })
+}
+  
+remove () {
+    console.log("Removing");
+}
+  
 render() {
 
 return (
-      <div className="commentContainer">
+ <div className="commentContainer">
 <div className="commentText">{this.props.children}</div>
-<button style={{color: "#000"}} className="btn btn-primary">Edit</button>
-<button className="btn btn-danger">Delete</button>
+<button onClick={this.edit} style={{color: "#000"}} className="btn btn-primary">Edit</button>
+<button onClick={this.remove} className="btn btn-danger">Delete</button>
 </div>
 );
 

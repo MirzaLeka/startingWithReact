@@ -20,6 +20,9 @@ class CheckBox extends React.Component{
 
   constructor(props) {
    super(props);
+
+this.changeState = this.changeState.bind(this); // we must bind this keyword because it's not recognized (all the time) in ES6
+
    this.state = {isChecked: true};
   }
   
