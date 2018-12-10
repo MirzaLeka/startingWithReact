@@ -1,7 +1,12 @@
-# React Webpack Starter
-> Repository serves as my practice course on ReactJS
+## **ReactJS Youtube Application** ##
 
-## Quick Start
+![](Resources/img/preview.jpg)
+
+#### *App Info*
+
+Using Youtube API, I made a simple React app that allows users to search for Youtube videos and get list of related videos as a response.
+
+#### *Quick Start*
 
 ``` bash
 # Install dependencies
@@ -13,7 +18,3 @@ npm start
 # Build for production
 npm run build
 ``` 
-
-## App Info
-
-Using Youtube API, I made a simple React app that allows users to search for Youtube videos and get list of related videos as a response.
